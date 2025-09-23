@@ -97,20 +97,7 @@ const modules = [
         example: "`dikhao fruits[0];`",
       },
     ],
-  },
-  {
-    title: "Module: Functions",
-    color: "text-pink-300",
-    topics: [
-      {
-        name: "Function Creation",
-        definition:
-          "Define reusable logic blocks using `kaam` and call them with parameters.",
-        syntax: '`kaam greet(person) { dikhao "Hi, " + person; }`',
-        example: '`greet("LangForage");`',
-      },
-    ],
-  },
+  }
 ];
 
 export default function Course() {
