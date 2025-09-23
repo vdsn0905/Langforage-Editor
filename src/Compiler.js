@@ -57,7 +57,7 @@ function lexer(input) {
         word += char;
         char = input[++current];
       }
-      const keywords = ["banao", "dikhao", "yadi", "nahito", "jabtak", "kaam", "vapas"];
+      const keywords = ["banao", "dikhao", "yadi", "nahito", "jabtak"];
       tokens.push({
         type: keywords.includes(word) ? "keyword" : "identifier",
         value: word,
@@ -124,15 +124,6 @@ function parser(tokens) {
       return { type: "Print", expression: expression.trim() };
     }
 
-    if (token?.type === "keyword" && token.value === "vapas") {
-      let expression = "";
-      while (tokens[0]?.value !== ";") {
-        expression += parseTokenValue(tokens.shift());
-      }
-      if (tokens[0]?.value === ";") tokens.shift();
-      return { type: "Return", expression: expression.trim() };
-    }
-
     if (token?.type === "keyword" && token.value === "yadi") {
       let condition = "";
       while (tokens[0]?.value !== "{") {
@@ -196,50 +187,6 @@ function parser(tokens) {
       };
     }
 
-    if (token?.type === "keyword" && token.value === "kaam") {
-      const name = tokens.shift().value;
-      tokens.shift(); 
-      const params = [];
-      while (tokens[0]?.value !== ")") {
-        if (tokens[0]?.type === "identifier") {
-          params.push(tokens.shift().value);
-        } else {
-          tokens.shift();
-        }
-      }
-      tokens.shift();
-      tokens.shift(); 
-
-      const body = [];
-      while (tokens[0]?.value !== "}") {
-        body.push(walk());
-      }
-      tokens.shift();
-
-      return {
-        type: "FunctionDeclaration",
-        name,
-        params,
-        body,
-      };
-    }
-
-    if (token?.type === "identifier" && tokens[0]?.value === "(") {
-      tokens.shift(); 
-      const args = [];
-      while (tokens[0]?.value !== ")") {
-        args.push(parseTokenValue(tokens.shift()));
-        if (tokens[0]?.value === ",") tokens.shift();
-      }
-      tokens.shift(); 
-      if (tokens[0]?.value === ";") tokens.shift();
-      return {
-        type: "CallExpression",
-        callee: token.value,
-        arguments: args,
-      };
-    }
-
     return null;
   }
 
@@ -259,8 +206,6 @@ function codeGenerator(node) {
       return `let ${node.name} = ${node.value};`;
     case "Print":
       return `console.log(${node.expression});`;
-    case "Return":
-      return `return ${node.expression};`;
     case "IfElse":
       return `if (${node.condition}) {\n${node.thenBlock
         .map(codeGenerator)
@@ -271,12 +216,6 @@ function codeGenerator(node) {
       return `for (${node.init}; ${node.condition}; ${
         node.increment
       }) {\n${node.body.map(codeGenerator).join("\n")}\n}`;
-    case "FunctionDeclaration":
-      return `function ${node.name}(${node.params.join(", ")}) {\n${node.body
-        .map(codeGenerator)
-        .join("\n")}\n}`;
-    case "CallExpression":
-      return `${node.callee}(${node.arguments.join(", ")});`;
     default:
       throw new Error("Unknown node type: " + node.type);
   }
