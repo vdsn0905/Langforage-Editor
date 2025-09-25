@@ -31,7 +31,7 @@ export default function Footer() {
     },
     {
       profilePic:
-        "https://tse3.mm.bing.net/th/id/OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs?pid=Api&P=0&h=180",
+        "sanketPic.png",
       name: "Sanket Patil",
       role: "Developer",
       github: "https://github.com/Sanket5749",
@@ -98,3 +98,4 @@ export default function Footer() {
     </div>
   );
 }
+
