@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { challenges } from "./challenges";
 import { compiler, runner } from "../Compiler";
+import CodeEditor from "./CodeEditor";
 import Rendering from "./Rendering";
 
 function SplashScreen() {
@@ -27,20 +28,21 @@ export default function SolveChallenge() {
   const run = () => {
     try {
       const compiled = compiler(code);
-      runner(compiled, (out) => {
+      const expected = challenge?.expectedOutput;
+      /** @param {string} out */
+      const handleOutput = (out) => {
         setOutput(out);
-        if (
-          challenge.expectedOutput &&
-          out.trim() === challenge.expectedOutput.trim()
-        ) {
+        if (expected && out.trim() === expected.trim()) {
           setResult("✅ Correct output!");
           setSolved(true);
         } else {
           setResult("❌ Wrong output, try again.");
         }
-      });
+      };
+      runner(compiled, handleOutput);
     } catch (err) {
-      setOutput("⚠️ Error: " + err.message);
+      const message = err && typeof err === "object" && "message" in err ? err.message : String(err);
+      setOutput("⚠️ Error: " + message);
       setResult("❌ Compilation failed.");
     }
   };
@@ -84,11 +86,7 @@ export default function SolveChallenge() {
               {copied ? "✅ Copied!" : "Copy"}
             </button>
           </p>
-          <textarea
-            className="w-full h-64 p-4 bg-gray-900 text-white border border-gray-700 rounded resize-none"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-          />
+          <CodeEditor code={code} setCode={setCode} className="mt-2 w-full" />
 
           <button
             onClick={run}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { compiler, runner } from "../Compiler";
 import { Link } from "react-router-dom";
 import Rendering from "./Rendering";
+import CodeEditor from "./CodeEditor";
 
 function SplashScreen() {
   return <Rendering />;
@@ -23,7 +24,8 @@ export default function Ide() {
       const compiledCode = compiler(code);
       runner(compiledCode, setOutput);
     } catch (err) {
-      setOutput("⚠️ Compilation error: " + err.message);
+      const message = err && typeof err === "object" && "message" in err ? err.message : String(err);
+      setOutput("⚠️ Compilation error: " + message);
     }
   };
   const handleCopy = async () => {
@@ -62,10 +64,10 @@ export default function Ide() {
               {copied ? "✅ Copied!" : "Copy"}
             </button>
           </p>
-          <textarea
-            className="w-full h-64 p-4 rounded-md border border-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none bg-gray-900 text-white"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
+          <CodeEditor
+            code={code}
+            setCode={setCode}
+            className="mt-2 w-full"
           />
 
           <button
