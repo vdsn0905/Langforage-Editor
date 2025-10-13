@@ -109,42 +109,5 @@ export const challenges = [
     hint: "Use yadi and nahito.",
     expectedOutput: `big\n`,
   },
-  {
-    level: 16,
-    title: "Is Positive",
-    task: "Declare x = -3 and print 'positive' if x > 0 else print 'non-positive'.",
-    hint: "Use yadi and nahito.",
-    expectedOutput: `non-positive\n`,
-  },
-  {
-    level: 17,
-    title: "Even or Odd",
-    task: "Declare n = 8 and print 'even' if n is even otherwise print 'odd'.",
-    hint: "Use % and yadi/nahito.",
-    expectedOutput: `even\n`,
-
-  },
-
-  // Level 18..21: strings and comparisons
-  {
-    level: 18,
-    title: "Concatenate Strings",
-    task: "Declare two strings 'foo' and 'bar' and print them concatenated.",
-    hint: "Use + to join strings and dikhao to print.",
-    expectedOutput: `foobar\n`,
-  },
-  {
-    level: 19,
-    title: "String Repeat",
-    task: "Declare a = 'ha' and b = a + a, then print b.",
-    hint: "Use + to join strings.",
-    expectedOutput: `haha\n`,
-  },
-  {
-    level: 20,
-    title: "Compare Strings",
-    task: "Declare s = 'abc' and t = 'abc'. Print 'equal' if they are equal, else 'not equal'.",
-    hint: "Use yadi with == to compare strings.",
-    expectedOutput: `equal\n`,
-  }
 ];
+
