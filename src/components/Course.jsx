@@ -73,31 +73,6 @@ const modules = [
       },
     ],
   },
-  {
-    title: "Module: Loops",
-    color: "text-indigo-300",
-    topics: [
-      {
-        name: "Using `jabtak`",
-        definition: "Repeat a block of code using a counter variable.",
-        syntax: "`jabtak i = 0; i < 5; i++ { ... }`",
-        example: '`dikhao "Iteration " + i;`',
-      },
-    ],
-  },
-  {
-    title: "Module: Arrays",
-    color: "text-purple-300",
-    topics: [
-      {
-        name: "Array Declaration & Access",
-        definition:
-          "Store multiple values using `[ ]`, and access them by index.",
-        syntax: '`banao fruits = ["apple", "banana", "cherry"];`',
-        example: "`dikhao fruits[0];`",
-      },
-    ],
-  }
 ];
 
 export default function Course() {
@@ -148,3 +123,4 @@ export default function Course() {
     </div>
   );
 }
+
