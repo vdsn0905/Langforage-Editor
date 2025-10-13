@@ -57,7 +57,7 @@ function lexer(input) {
         word += char;
         char = input[++current];
       }
-      const keywords = ["banao", "dikhao", "yadi", "nahito", "jabtak"];
+      const keywords = ["banao", "dikhao", "yadi", "nahito"];
       tokens.push({
         type: keywords.includes(word) ? "keyword" : "identifier",
         value: word,
@@ -75,7 +75,7 @@ function lexer(input) {
       continue;
     }
 
-    if (/[\+\-\*\=;<>\{\}\(\)\[\],]/.test(char)) {
+    if (/[+\-*%=;<>(),]/.test(char)) {
       tokens.push({ type: "operator", value: char });
       current++;
       continue;
@@ -103,10 +103,7 @@ function parser(tokens) {
       if (tokens[0]?.value === "=") {
         tokens.shift();
         let expression = "";
-        let bracketCount = 0;
-        while (tokens[0] && (tokens[0].value !== ";" || bracketCount > 0)) {
-          if (tokens[0].value === "[") bracketCount++;
-          if (tokens[0].value === "]") bracketCount--;
+        while (tokens[0] && tokens[0].value !== ";") {
           expression += parseTokenValue(tokens.shift());
         }
         value = expression.trim();
@@ -154,39 +151,6 @@ function parser(tokens) {
         elseBlock,
       };
     }
-
-    if (token?.type === "keyword" && token.value === "jabtak") {
-      let init = "",
-        cond = "",
-        incr = "";
-      while (tokens[0]?.value !== ";") {
-        init += parseTokenValue(tokens.shift());
-      }
-      tokens.shift();
-      while (tokens[0]?.value !== ";") {
-        cond += parseTokenValue(tokens.shift());
-      }
-      tokens.shift();
-      while (tokens[0]?.value !== "{") {
-        incr += parseTokenValue(tokens.shift());
-      }
-      tokens.shift();
-
-      const body = [];
-      while (tokens[0]?.value !== "}") {
-        body.push(walk());
-      }
-      tokens.shift();
-
-      return {
-        type: "ForLoop",
-        init: init.trim(),
-        condition: cond.trim(),
-        increment: incr.trim(),
-        body,
-      };
-    }
-
     return null;
   }
 
@@ -212,10 +176,6 @@ function codeGenerator(node) {
         .join("\n")}\n} else {\n${node.elseBlock
         .map(codeGenerator)
         .join("\n")}\n}`;
-    case "ForLoop":
-      return `for (${node.init}; ${node.condition}; ${
-        node.increment
-      }) {\n${node.body.map(codeGenerator).join("\n")}\n}`;
     default:
       throw new Error("Unknown node type: " + node.type);
   }
