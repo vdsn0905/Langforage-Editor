@@ -69,39 +69,5 @@ export const challenges = [
     hint: "Use dikhao with division.",
     expectedOutput: `5\n`,
   },
-  {
-    level: 11,
-    title: "Print Array Length",
-    task: "Print the length of array [1, 2, 3, 4].",
-    hint: "Use arr.length.",
-    expectedOutput: `4\n`,
-  },
-  {
-    level: 12,
-    title: "Sum All Array Elements",
-    task: "Print the sum of all elements in array [2, 4, 6, 8] using a loop.",
-    hint: "Use jabtak to loop and sum.",
-    expectedOutput: `20\n`,
-  },
-  {
-    level: 13,
-    title: "Find Maximum in Array",
-    task: "Print the maximum value in array [7, 3, 9, 5].",
-    hint: "Use a loop and comparison.",
-    expectedOutput: `9\n`,
-  },
-  {
-    level: 14,
-    title: "Reverse a String",
-    task: "Print the reverse of string 'hello'.",
-    hint: "Use a loop from end to start.",
-    expectedOutput: `olleh\n`,
-  },
-  {
-    level: 15,
-    title: "Find Smallest in Array",
-    task: "Print the smallest value in array [8, 3, 6, 2].",
-    hint: "Use a loop and comparison.",
-    expectedOutput: `2\n`,
-  },
 ];
+
