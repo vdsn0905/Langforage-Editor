@@ -1,5 +1,4 @@
 export const challenges = [
-  // Level 1..6: simplest prints and declarations
   {
     level: 1,
     title: "Print Hello",
@@ -42,8 +41,6 @@ export const challenges = [
     hint: "Use + to join strings.",
     expectedOutput: `HelloWorld\n`,
   },
-
-  // Level 7..12: basic arithmetic and concatenation
   {
     level: 7,
     title: "Simple Addition",
@@ -72,42 +69,4 @@ export const challenges = [
     hint: "Use dikhao with division.",
     expectedOutput: `5\n`,
   },
-  {
-    level: 11,
-    title: "Compute Expression",
-    task: "Print the result of (8 + 2) * 3.",
-    hint: "Use arithmetic operators.",
-    expectedOutput: `30\n`,
-  },
-  {
-    level: 12,
-    title: "Multiply and Add",
-    task: "Print the result of (4 * 5) + 2.",
-    hint: "Combine multiplication and addition in one expression.",
-    expectedOutput: `22\n`,
-  },
-
-  // Level 13..17: conditionals and simple comparisons
-  {
-    level: 13,
-    title: "Find Minimum of Two",
-    task: "Declare a = 5, b = 3 and print the smaller value using a conditional.",
-    hint: "Use yadi and nahito to compare and print.",
-    expectedOutput: `3\n`,
-  },
-  {
-    level: 14,
-    title: "Max of Two",
-    task: "Declare a = 7 and b = 12, then print the larger value using a conditional.",
-    hint: "Use yadi to compare a and b.",
-    expectedOutput: `12\n`,
-  },
-  {
-    level: 15,
-    title: "Conditional Check",
-    task: "Declare x = 10 and if x greater than 5 print 'big' else print 'small'.",
-    hint: "Use yadi and nahito.",
-    expectedOutput: `big\n`,
-  },
 ];
-
