@@ -107,7 +107,7 @@ const modules = [
         definition:
           "Define reusable logic blocks using `kaam` and call them with parameters.",
         syntax: '`kaam greet(person) { dikhao "Hi, " + person; }`',
-        example: '`greet("SLANG");`',
+        example: '`greet("LangForage");`',
       },
     ],
   },
@@ -161,5 +161,6 @@ export default function Course() {
     </div>
   );
 }
+
 
 
